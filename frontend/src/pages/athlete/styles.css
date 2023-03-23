@@ -1,0 +1,13 @@
+.container {
+  display: grid;
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+}
+
+.button {
+  width: 200px;
+}

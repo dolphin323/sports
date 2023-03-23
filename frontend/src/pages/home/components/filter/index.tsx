@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useState } from "react";
 import { Filter as FilterType } from "../../types";
+import "./Filter.css";
 
 function Filter({ getAthletes }: { getAthletes: any }) {
   const [filters, setFilters] = useState<FilterType | null>(null);
@@ -27,22 +28,42 @@ function Filter({ getAthletes }: { getAthletes: any }) {
     getAthletes();
   };
 
+  console.log(filters);
+
   return (
-    <div>
+    <div className="filter">
       Filters
-      <form>
-        <label>
-          Is active:
+      <form className="filter-form">
+        <label
+          style={{
+            flexDirection: "row",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          Is active:{" "}
           <input
             name="isActive"
             type="checkbox"
             checked={filters?.isActive ?? false}
             onChange={handleFilterChange}
           />
+          {filters?.isActive !== undefined && (
+            <span>
+              <p>{filters.isActive ? "True" : "False"}</p>
+              {/* <button
+                onClick={() => {
+                  setFilters({ ...filters, isActive: undefined });
+                }}
+              >
+                remove
+              </button> */}
+            </span>
+          )}
         </label>
         <br />
         <label>
-          Name:
+          Name:{" "}
           <input
             name="name"
             type="string"
@@ -52,7 +73,7 @@ function Filter({ getAthletes }: { getAthletes: any }) {
         </label>
         <br />
         <label>
-          Surname:
+          Surname:{" "}
           <input
             name="surname"
             type="string"
@@ -62,7 +83,7 @@ function Filter({ getAthletes }: { getAthletes: any }) {
         </label>
         <br />
         <label>
-          Successful games:
+          Successful games:{" "}
           <input
             name="successfulGamesMin"
             type="number"
@@ -81,7 +102,7 @@ function Filter({ getAthletes }: { getAthletes: any }) {
         </label>
         <br />
         <label>
-          Date of birth:
+          Date of birth:{" "}
           <input
             name="dateOfBirthMin"
             type={"date"}
@@ -98,9 +119,43 @@ function Filter({ getAthletes }: { getAthletes: any }) {
             max={dayjs(new Date()).format("YYYY-MM-DD")}
           />
         </label>
+        <br />
+        <label>
+          Sports:{" "}
+          <input
+            name="sports"
+            type="string"
+            value={filters?.sports ?? ""}
+            onChange={handleFilterChange}
+          />
+        </label>
+        <br />
+        <label>
+          Biography:{" "}
+          <input
+            name="biography"
+            type="string"
+            value={filters?.biography ?? ""}
+            onChange={handleFilterChange}
+          />
+        </label>
+        <br />
+        <label>
+          Career description:{" "}
+          <input
+            name="careerDescription"
+            type="string"
+            value={filters?.careerDescription ?? ""}
+            onChange={handleFilterChange}
+          />
+        </label>
       </form>
-      <button onClick={handleFiltersApply}>Apply</button>
-      <button onClick={removeFilters}>Remove filters</button>
+      <button onClick={handleFiltersApply} className="button">
+        Apply
+      </button>
+      <button onClick={removeFilters} className="button">
+        Remove filters
+      </button>
     </div>
   );
 }

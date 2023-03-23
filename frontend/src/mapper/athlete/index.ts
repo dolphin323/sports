@@ -9,6 +9,9 @@ const mapAthleteFromApi = (athlete: AthleteRaw): Athlete => {
     name: info.name,
     surname: info.surname,
     successfulGames: info.successfulGames,
+    sports: info.sports,
+    biography: info.biography,
+    careerDescription: info.careerDescription,
   };
 };
 

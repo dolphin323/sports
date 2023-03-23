@@ -9,6 +9,9 @@ interface AthleteRaw {
     name: string;
     surname: string;
     successfulGames: number;
+    sports: string;
+    biography: string;
+    careerDescription: string;
   };
 }
 
@@ -19,6 +22,9 @@ interface Athlete {
   name: string;
   surname: string;
   successfulGames: number;
+  sports: string;
+  biography: string;
+  careerDescription: string;
 }
 
 export { type AthleteRaw, type Athlete };

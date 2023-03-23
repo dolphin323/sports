@@ -15,7 +15,7 @@ function getQuery(filters) {
     query.bool.must.push(q);
   };
 
-  if (filters.name !== undefined) {
+  if (filters.name) {
     pushQuery({
       wildcard: {
         name: {
@@ -26,10 +26,10 @@ function getQuery(filters) {
     });
   }
 
-  if (filters.surname !== undefined) {
+  if (filters.surname) {
     pushQuery({
       wildcard: {
-        name: {
+        surname: {
           value: `*${filters.surname}*`,
           case_insensitive: true,
         },
@@ -70,6 +70,30 @@ function getQuery(filters) {
           gte: filters.dateOfBirthMin,
           lte: filters.dateOfBirthMax,
         },
+      },
+    });
+  }
+
+  if (filters.sports !== undefined) {
+    pushQuery({
+      match: {
+        sports: filters.sports,
+      },
+    });
+  }
+
+  if (filters.biography !== undefined) {
+    pushQuery({
+      match: {
+        biography: filters.biography,
+      },
+    });
+  }
+
+  if (filters.careerDescription !== undefined) {
+    pushQuery({
+      match: {
+        careerDescription: filters.careerDescription,
       },
     });
   }

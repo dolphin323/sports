@@ -7,9 +7,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div>
-          <Link to={"/create-athlete"}>Create athlete </Link>
-          <Link to={"/"}>Home</Link>
+        <div className="navbar">
+          <Link to={"/"} className="navbar-link">
+            Home{" "}
+          </Link>
+          <Link to={"/create-athlete"} className="navbar-link">
+            Create athlete{" "}
+          </Link>
         </div>
         <Routes>
           <Route path="/" element={<Home />} />

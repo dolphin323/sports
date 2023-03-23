@@ -1,21 +1,29 @@
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import "./styles.css";
 
 import { AthleteService } from "../../api/athlete";
 import { Athlete } from "../../api/athlete/types";
 
+const defaultAthlete: Omit<Athlete, "id"> = {
+  dateOfBirth: "",
+  isActive: false,
+  name: "",
+  surname: "",
+  successfulGames: 0,
+  sports: "",
+  biography: "",
+  careerDescription: "",
+};
+
 function CreateAthlete() {
-  const [athlete, setAthlete] = useState<Omit<Athlete, "id">>({
-    dateOfBirth: "",
-    isActive: false,
-    name: "",
-    surname: "",
-    successfulGames: 0,
-  });
+  const [athlete, setAthlete] = useState<Omit<Athlete, "id">>(defaultAthlete);
 
   const addAthlete = async () => {
     if (athlete) {
       await AthleteService.add(athlete);
+      alert("Successfully added!");
+      setAthlete(defaultAthlete);
     }
   };
 
@@ -31,8 +39,8 @@ function CreateAthlete() {
   };
 
   return (
-    <div>
-      <form>
+    <div className="container">
+      <form className="form">
         <label>
           Is active:
           <input
@@ -44,7 +52,7 @@ function CreateAthlete() {
         </label>
         <br />
         <label>
-          Name:
+          Name:{" "}
           <input
             name="name"
             type="string"
@@ -54,7 +62,7 @@ function CreateAthlete() {
         </label>
         <br />
         <label>
-          Surname:
+          Surname:{" "}
           <input
             name="surname"
             type="string"
@@ -64,7 +72,35 @@ function CreateAthlete() {
         </label>
         <br />
         <label>
-          Successful games:
+          Sports:{" "}
+          <input
+            name="sports"
+            type="string"
+            value={athlete?.sports ?? ""}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Biography:{" "}
+          <textarea
+            name="biography"
+            value={athlete?.biography ?? ""}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Career description:{" "}
+          <textarea
+            name="careerDescription"
+            value={athlete?.careerDescription ?? ""}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Successful games:{" "}
           <input
             name="successfulGames"
             type="number"
@@ -75,7 +111,7 @@ function CreateAthlete() {
         </label>
         <br />
         <label>
-          Date of birth:
+          Date of birth:{" "}
           <input
             name="dateOfBirth"
             type={"date"}
@@ -85,7 +121,9 @@ function CreateAthlete() {
           />
         </label>
       </form>
-      <button onClick={addAthlete}>Add</button>
+      <button onClick={addAthlete} className={"button"}>
+        Add
+      </button>
     </div>
   );
 }

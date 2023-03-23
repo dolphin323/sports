@@ -6,6 +6,9 @@ interface Filter {
   isActive?: boolean;
   dateOfBirthMin?: string;
   dateOfBirthMax?: string;
+  sports?: string;
+  biography?: string;
+  careerDescription?: string;
 }
 
 export { type Filter };

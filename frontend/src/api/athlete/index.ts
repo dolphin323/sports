@@ -12,6 +12,7 @@ class AthleteApi {
   async getAll() {
     const res = await fetch("http://0.0.0.0:3000/");
     const athletes: AthleteRaw[] = await res.json();
+
     return athletes.map((athlete) => mapAthleteFromApi(athlete));
   }
 
@@ -19,14 +20,14 @@ class AthleteApi {
     const queryString = new URLSearchParams(
       filters as Record<string, any>
     ).toString();
-    console.log(queryString);
     const res = await fetch(`http://0.0.0.0:3000/?${queryString}`);
     const athletes: AthleteRaw[] = await res.json();
+
     return athletes.map((athlete) => mapAthleteFromApi(athlete));
   }
 
   async add(athlete: Omit<Athlete, "id">) {
-    await fetch("http://0.0.0.0:3000/", {
+    const res = await fetch("http://0.0.0.0:3000/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -34,11 +35,13 @@ class AthleteApi {
       },
       body: JSON.stringify(athlete),
     });
+    return res;
   }
   async delete(id: string) {
-    await fetch(`http://0.0.0.0:3000/${id}`, {
+    const res = await fetch(`http://0.0.0.0:3000/${id}`, {
       method: "DELETE",
     });
+    return res;
   }
 }
 
